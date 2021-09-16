@@ -45,7 +45,6 @@ CREATE (enlil:God {name: 'Enlil', source: 'p393721'}),
 (generic)-[:REQUESTS_PEACE]->(sin),
 (generic)-[:REQUESTS_FORGIVENESS]->(sin),
 (generic)-[:PRAISES]->(sin),
-(generic)-[:REQUESTS_INTERCESSION]->(ishtar)-[:INTERCEDES]->(nabu),
 (generic)-[:FEARS]->(eclipse),
 
 // prayer 393796 ////////////////
