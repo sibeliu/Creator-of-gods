@@ -1,0 +1,146 @@
+
+//start inputting shuila prayer info below one prayer at a time
+//prayer 393721 ///////////////////////
+
+//create gods
+CREATE (enlil:God {name: 'Enlil', source: 'p393721'}),
+(fate:God {name: 'Fate'}),
+
+//create persons
+(generic:Person {name: 'generic persons'}),
+
+//create events
+(eclipse:NaturalObject {name: 'lunar eclipse'}),
+
+//create relations
+(generic)-[:FEARS]->(eclipse),
+(generic)-[:REQUESTS_LIFE]->(enlil),
+(generic)-[:TRUSTS]->(enlil),
+(generic)-[:REQUESTS_PROTECTION]->(enlil),
+(fate)-[:CAUSES]->(eclipse),
+
+
+// prayer 259033 //////////////////////
+(sham:Person {name: 'Shamash-shum-ukin', source: 'p259033'}),
+
+(marduk:God {name: 'Marduk', source: 'p259033'}),
+(zarpanitu:God {name: 'Zarpanitu', source: 'p259033'}),
+
+(sham)-[:FEARS]->(eclipse),
+(sham)-[:REQUESTS_LIFE]->(marduk),
+(sham)-[:REQUESTS_HEALTH]->(marduk),
+
+// prayer 393771 ////////////////
+
+(sin:God {name: 'Sin', source: 'p393771'}),
+(anu:God {name: 'Anu', source: 'p393771'}),
+(shamash:God {name: 'Shamash', source: 'p393771'}),
+(ishtar:God {name: 'Ishtar', source: 'p393771'}),
+(nabu:God {name: 'Nabu', source: 'p393771'}),
+
+(generic)-[:OFFERS_BEER]->(sin),
+(generic)-[:OFFERS_FLOUR]->(sin),
+(generic)-[:KNEELS_TO]->(sin),
+(generic)-[:REQUESTS_JUST_UTTERANCE]->(sin),
+(generic)-[:REQUESTS_PEACE]->(sin),
+(generic)-[:REQUESTS_FORGIVENESS]->(sin),
+(generic)-[:PRAISES]->(sin),
+(generic)-[:REQUESTS_INTERCESSION]->(ishtar)-[:INTERCEDES]->(nabu),
+(generic)-[:FEARS]->(eclipse),
+
+// prayer 393796 ////////////////
+
+(ninurta:God {name: 'Ninurta', source: 'p393796'}),
+(ashur:God {name: 'Ashur', source: 'p393796'}),
+(ashuritu:God {name: 'Ashuritu', source: 'p393796'}),
+(ash:Person {name: 'Ashurbanipal', source: 'p393796'}),
+
+(ash)-[:OFFERS_FLOUR]->(ninurta),
+(ash)-[:OFFERS_BEER]->(ninurta),
+(ash)-[:OFFERS_INCENSE]->(ninurta),
+(ash)-[:REQUESTS_PROTECTION]->(ninurta),
+(ash)-[:REQUESTS_FORGIVENESS]->(ninurta),
+(ash)-[:FEARS]->(eclipse),
+
+// END OF SHUILA PRAYERS INPUT ///////////////
+// NOW INPUT PSALMS
+
+(lord:God {name: ['YHWH', 'Lord', 'God']}),
+(psalmist:Person {name: 'Psalmist'}),
+
+// psalm 21
+(king:Person {name: 'King', source: 'ps. 21'}),
+(enemies:Person {name: 'Enemies', source: 'ps.21'}),
+(lord)-[:GIVES_LIFE {source: 'ps. 21'}]->(king),
+(lord)<-[:ASKS_LIFE {source: 'ps. 21'}]-(king),
+(king)-[:TRUSTS {source: 'ps.21'}]->(lord),
+(lord)-[:DESTROYS {source: 'ps. 21'}]->(enemies),
+
+// psalm 33
+(righteous:Person {name: 'Righteous'}),
+(heavens:NaturalObject {name: 'Heavens'}),
+(nations:Person {name: 'Nations'}),
+
+(righteous)-[:SHOUT_FOR_JOY {source: 'ps. 33'}]->(lord),
+(righteous)-[:PRAISES {source: 'ps. 33'}]->(lord),
+(righteous)-[:THANKS {source: 'ps. 33'}]->(lord),
+(righteous)-[:SING {source: 'ps. 33'}]->(lord),
+(lord)-[:CREATE {source: 'ps. 33'}]->(heavens),
+(lord)-[:FRUSTRATES_PLANS {source: 'ps. 33'}]->(nations),
+(lord)-[:OBSERVES {source: 'ps. 33'}]->(nations),
+(psalmist)-[:WAITS_ON {source: 'ps.33'}]->(lord),
+(psalmist)-[:TRUSTS {source: 'ps.33'}]->(lord),
+(psalmist)-[:HOPES {source: 'ps.33'}]->(lord),
+
+// psalm 71
+
+(psalmist)-[:TAKES_REFUGE {source: 'ps.71'}]->(lord),
+(psalmist)-[:REQUESTS_PROTECTION {source: 'ps.71'}]->(lord),
+(psalmist)-[:REQUESTS_LIFE {source: 'ps.71'}]->(lord),
+(psalmist)-[:PRAISES {source: 'ps.71'}]->(lord),
+(enemies)-[:SLANDER {source: 'ps.71'}]->(psalmist),
+(lord)-[:SHAMES {source: 'ps.71'}]->(enemies),
+(lord)-[:TEACHES {source: 'ps.71'}]->(psalmist),
+(lord)-[:REVIVES {source: 'ps.71'}]->(psalmist),
+
+// psalm 96
+(world:NaturalObject {name: 'World'}),
+(lord)-[:JUDGES {source: 'ps 96'}]->(world),
+(lord)-[:JUDGES {source: 'ps 96'}]->(nations)
+
+////////////////END OF INPUT////////////////////////
+
+/// extra commands that are sometimes useful
+
+
+
+MATCH
+(client:Person {name: 'Shamash-shum-ukin'}),
+(eclipse:Event {type: 'lunar eclipse'})
+MERGE (client)-[r:FEARS]-(eclipse)
+RETURN r
+
+MATCH
+  (client:Person {name: 'Shamash-shum-ukin'}),
+  (god:God {name: 'Marduk'})
+MERGE (client)-[r:REQUESTS_HEALTH]-(god)
+RETURN r
+
+CREATE (:God{name:'Ishtar'})
+
+MATCH ()-[r]->()
+WHERE id(r) = 6
+DELETE r
+
+MATCH (h:Object) WHERE h.role = 'diviner'
+MATCH (s:Object) WHERE s.type = 'star'
+CREATE (h)-[:OBSERVES]->(s)
+
+MATCH (s:Object{type:'moon'}),
+(m:Object) WHERE id(m) = 4
+Create (s)-[:AFFECTS]->(m)
+
+MATCH (n)
+DETACH DELETE n
+
+
