@@ -1,6 +1,6 @@
 This is Cypher code for the Neo4j platform. It encodes a subset of shuila prayers and psalms according to the relations between gods, humans, and natural objects.
 The visualization software for Neo4j, especially Bloom, permits an intuitive comparison of the two religions expressed by these two corpora.
-Further encoding is needed to verify these first results, which I share here because of their methodological usefulness.
+Further encoding is needed to verify these first results, which I share here because of their potential methodological usefulness more than for the specific results achieved thus far.
 
 A first version of this software was presented in August 2021 at the EASR conference (Pisa). A video is here: https://www.youtube.com/watch?v=JCLU2CoN3NM
 
