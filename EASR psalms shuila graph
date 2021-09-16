@@ -109,38 +109,3 @@ CREATE (enlil:God {name: 'Enlil', source: 'p393721'}),
 (lord)-[:JUDGES {source: 'ps 96'}]->(nations)
 
 ////////////////END OF INPUT////////////////////////
-
-/// extra commands that are sometimes useful
-
-
-
-MATCH
-(client:Person {name: 'Shamash-shum-ukin'}),
-(eclipse:Event {type: 'lunar eclipse'})
-MERGE (client)-[r:FEARS]-(eclipse)
-RETURN r
-
-MATCH
-  (client:Person {name: 'Shamash-shum-ukin'}),
-  (god:God {name: 'Marduk'})
-MERGE (client)-[r:REQUESTS_HEALTH]-(god)
-RETURN r
-
-CREATE (:God{name:'Ishtar'})
-
-MATCH ()-[r]->()
-WHERE id(r) = 6
-DELETE r
-
-MATCH (h:Object) WHERE h.role = 'diviner'
-MATCH (s:Object) WHERE s.type = 'star'
-CREATE (h)-[:OBSERVES]->(s)
-
-MATCH (s:Object{type:'moon'}),
-(m:Object) WHERE id(m) = 4
-Create (s)-[:AFFECTS]->(m)
-
-MATCH (n)
-DETACH DELETE n
-
-
